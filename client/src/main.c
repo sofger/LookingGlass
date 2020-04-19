@@ -490,6 +490,26 @@ int spiceThread(void * arg)
 static inline const uint32_t mapScancode(SDL_Scancode scancode)
 {
   uint32_t ps2;
+  switch (scancode) {
+  case 0x103:
+          return 0xe010;
+  case 0x105:
+          return 0xe022;
+  case 0x102:
+          return 0xe019;
+  case 0x7f:
+          return 0xe020;
+  case 0x81:
+          return 0xe02e;
+  case 0x80:
+          return 0xe030;
+  case 0x10a:
+          return 0xe021;
+  case 0x10d:
+          return 0xe032;
+  default:
+      break;
+  }
   if (scancode > (sizeof(usb_to_ps2) / sizeof(uint32_t)) || (ps2 = usb_to_ps2[scancode]) == 0)
   {
     DEBUG_WARN("Unable to map USB scan code: %x\n", scancode);
